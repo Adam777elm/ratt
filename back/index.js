@@ -1,3 +1,6 @@
+// Charger les variables d'environnement (.env)
+require("dotenv").config();
+
 // Connexion à MongoDB
 require("./db");
 
@@ -5,7 +8,7 @@ const express = require("express");
 
 const app = express();
 
-// Middleware pour lire JSON
+// Middleware pour lire le JSON
 app.use(express.json());
 
 // Route test
@@ -20,9 +23,10 @@ app.get("/api/test", (req, res) => {
     });
 });
 
-// Port serveur
-const PORT = 3000;
+// Utiliser le PORT depuis .env
+const PORT = process.env.PORT || 3000;
 
+// Lancer le serveur
 app.listen(PORT, () => {
-    console.log("Serveur lancé sur http://localhost:" + PORT);
+    console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });
